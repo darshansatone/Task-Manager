@@ -1,5 +1,9 @@
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 const supabase = require('../config/supabase');
+
+// In-memory token store (must be declared before class methods reference it)
+const resetTokensStore = new Map();
 
 class UserModel {
   // Hash password helper
@@ -110,7 +114,7 @@ class UserModel {
 
     // 6-digit verification code & token
     const code = Math.floor(100000 + Math.random() * 900000).toString();
-    const token = crypto.randomUUID();
+    const token = crypto.randomBytes(32).toString('hex');
     const expiresAt = Date.now() + 15 * 60 * 1000; // 15 minutes
 
     const resetPayload = {
@@ -197,8 +201,5 @@ class UserModel {
     return null;
   }
 }
-
-// In-memory token store
-const resetTokensStore = new Map();
 
 module.exports = UserModel;
