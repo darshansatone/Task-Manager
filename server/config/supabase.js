@@ -11,12 +11,15 @@ const supabaseKey =
   process.env.SUPABASE_ANON_KEY;
 const forceMock = process.env.USE_MOCK_SUPABASE === 'true';
 
+// Detect serverless environments (Vercel, AWS Lambda, etc.) where fs writes are not persistent
+const IS_SERVERLESS = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.FUNCTION_NAME);
+
 // Local storage path for offline / zero-setup persistence
 const DATA_DIR = path.join(__dirname, '../data');
 const DB_FILE = path.join(DATA_DIR, 'local_db.json');
 
-// Ensure data directory exists
-if (!fs.existsSync(DATA_DIR)) {
+// Ensure data directory exists (only in non-serverless environments)
+if (!IS_SERVERLESS && !fs.existsSync(DATA_DIR)) {
   try {
     fs.mkdirSync(DATA_DIR, { recursive: true });
   } catch (err) {
@@ -34,6 +37,7 @@ let store = {
 
 // Load saved store from disk if available
 function loadStore() {
+  if (IS_SERVERLESS) return; // In serverless, skip file reads (use live DB)
   try {
     if (fs.existsSync(DB_FILE)) {
       const raw = fs.readFileSync(DB_FILE, 'utf8');
@@ -52,6 +56,7 @@ function loadStore() {
 
 // Save store to disk
 function saveStore() {
+  if (IS_SERVERLESS) return; // In serverless, writes are no-ops (use live DB)
   try {
     fs.writeFileSync(DB_FILE, JSON.stringify(store, null, 2), 'utf8');
   } catch (err) {
