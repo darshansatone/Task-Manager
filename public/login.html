@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - TaskMaster Pro</title>
+  <meta name="description" content="Sign in to your TaskMaster Pro account to manage your tasks and deadlines.">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+
+  <div class="auth-wrapper">
+
+    <!-- Theme toggle top right -->
+    <div style="position: absolute; top: 24px; right: 28px;">
+      <button id="themeToggleBtn" class="btn-icon" title="Toggle Theme"></button>
+    </div>
+
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="auth-logo">✓</div>
+        <div>
+          <h2 style="font-size: 1.35rem; line-height: 1.2;">TaskMaster <span style="color:var(--accent-primary);">Pro</span></h2>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Secure Workspace Access</span>
+        </div>
+      </div>
+
+      <h1 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; text-align: center;">Welcome Back</h1>
+      <p style="font-size: 0.88rem; text-align: center; margin-bottom: 24px;">Please enter your details to sign in.</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Email Address</label>
+          <input 
+            type="email" 
+            id="loginEmail" 
+            class="form-control" 
+            placeholder="name@example.com" 
+            required 
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <label class="form-label" for="loginPassword" style="margin-bottom: 0;">Password</label>
+            <a href="/forgot-password.html" style="font-size: 0.8rem; color: var(--accent-primary); font-weight: 500; text-decoration: none;">Forgot password?</a>
+          </div>
+          <input 
+            type="password" 
+            id="loginPassword" 
+            class="form-control" 
+            placeholder="••••••••" 
+            required 
+            autocomplete="current-password"
+          >
+        </div>
+
+        <button type="submit" id="loginSubmitBtn" class="btn btn-primary" style="width: 100%; margin-top: 10px; padding: 12px;">
+          Sign In
+        </button>
+
+        <!-- 1-Click Demo Fill Button -->
+        <button 
+          type="button" 
+          id="fillDemoBtn" 
+          class="btn btn-secondary btn-sm" 
+          style="width: 100%; margin-top: 12px; border-style: dashed;"
+        >
+          ⚡ Autofill Demo Credentials
+        </button>
+      </form>
+
+      <div style="margin-top: 24px; text-align: center; font-size: 0.85rem; color: var(--text-secondary);">
+        Don't have an account yet? 
+        <a href="/register.html" style="font-weight: 600;">Sign up for free</a>
+      </div>
+
+      <div style="margin-top: 16px; text-align: center;">
+        <a href="/" style="font-size: 0.8rem; color: var(--text-muted);">← Back to Home</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="toast-container"></div>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/notifications.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    // Autofill demo button
+    document.getElementById('fillDemoBtn').addEventListener('click', () => {
+      document.getElementById('loginEmail').value = 'alex@example.com';
+      document.getElementById('loginPassword').value = 'password123';
+      window.showToast('Demo credentials inserted. Click Sign In!', 'info');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskMaster Pro - Next-Generation Productivity & Task Management</title>
+  <meta name="description" content="Organize tasks, track deadlines, monitor weekly productivity, and stay on top of your workflow with TaskMaster Pro.">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body style="min-height: 100vh; display: flex; flex-direction: column;">
+
+  <!-- Navigation Bar -->
+  <header style="height: 72px; border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; padding: 0 32px; background: var(--bg-glass); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div class="brand-icon">✓</div>
+      <span style="font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em;">TaskMaster <span style="color: var(--accent-primary);">Pro</span></span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <button id="themeToggleBtn" class="btn-icon" title="Toggle Theme"></button>
+      <a href="/login.html" class="btn btn-secondary btn-sm" id="navLoginBtn">Sign In</a>
+      <a href="/register.html" class="btn btn-primary btn-sm" id="navRegisterBtn">Get Started Free</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px; text-align: center; background: radial-gradient(circle at 50% 10%, rgba(99, 102, 241, 0.18), transparent 50%), radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.12), transparent 40%), var(--bg-primary);">
+    
+    <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: var(--radius-full); background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); font-size: 0.82rem; font-weight: 700; color: var(--accent-primary); margin-bottom: 24px;">
+      <span>✨ Built for high-performance productivity</span>
+    </div>
+
+    <h1 style="font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.15; max-width: 820px; margin-bottom: 20px; font-weight: 800;">
+      Organize Effortlessly. <br>
+      <span style="background: linear-gradient(135deg, #6366f1, #06b6d4, #10b981); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Execute Flawlessly.</span>
+    </h1>
+
+    <p style="font-size: clamp(1rem, 2vw, 1.2rem); max-width: 640px; margin-bottom: 36px; color: var(--text-secondary);">
+      A full-stack task management dashboard with real-time analytics, deadline reminders, subtask breakdown, custom categories, and seamless productivity tracking.
+    </p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 50px;">
+      <a href="/register.html" class="btn btn-primary" style="padding: 13px 28px; font-size: 1rem;">
+        Launch Dashboard Free →
+      </a>
+      <a href="/login.html" class="btn btn-secondary" style="padding: 13px 24px; font-size: 1rem;">
+        Existing User Login
+      </a>
+    </div>
+
+    <!-- Feature Highlights Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; max-width: 1100px; width: 100%; text-align: left; margin-top: 20px;">
+      
+      <div class="glass-panel" style="padding: 24px;">
+        <div style="font-size: 1.8rem; margin-bottom: 12px;">📊</div>
+        <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Productivity Analytics</h3>
+        <p style="font-size: 0.88rem;">Track completion rates, 7-day productivity velocity, and daily completion streaks.</p>
+      </div>
+
+      <div class="glass-panel" style="padding: 24px;">
+        <div style="font-size: 1.8rem; margin-bottom: 12px;">⏰</div>
+        <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Deadline System</h3>
+        <p style="font-size: 0.88rem;">Dynamic visual indicators for Overdue, Due Today, and Upcoming with browser notifications.</p>
+      </div>
+
+      <div class="glass-panel" style="padding: 24px;">
+        <div style="font-size: 1.8rem; margin-bottom: 12px;">🏷️</div>
+        <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Categories & Tags</h3>
+        <p style="font-size: 0.88rem;">Color-coded workspaces for Work, Study, Projects, and Personal tasks with multi-tag filtering.</p>
+      </div>
+
+      <div class="glass-panel" style="padding: 24px;">
+        <div style="font-size: 1.8rem; margin-bottom: 12px;">🛡️</div>
+        <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Secure Architecture</h3>
+        <p style="font-size: 0.88rem;">Bcrypt password encryption, JWT authentication, isolated user databases, and trash restoration.</p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="padding: 24px 32px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted);">
+    <div>© 2026 TaskMaster Pro. Production-grade Node.js + Express + MongoDB application.</div>
+    <div>Designed for Portfolio & Real-World Use</div>
+  </footer>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/notifications.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    // If already logged in, adapt buttons
+    if (window.Auth && window.Auth.isAuthenticated()) {
+      const reg = document.getElementById('navRegisterBtn');
+      if (reg) {
+        reg.textContent = 'Go to Dashboard →';
+        reg.href = '/dashboard.html';
+      }
+      const log = document.getElementById('navLoginBtn');
+      if (log) log.style.display = 'none';
+    }
+  </script>
+</body>
+</html>

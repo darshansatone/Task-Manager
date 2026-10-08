@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - TaskMaster Pro</title>
+  <meta name="description" content="Create a free TaskMaster Pro account to start organizing your tasks and projects.">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+
+  <div class="auth-wrapper">
+
+    <!-- Theme toggle top right -->
+    <div style="position: absolute; top: 24px; right: 28px;">
+      <button id="themeToggleBtn" class="btn-icon" title="Toggle Theme"></button>
+    </div>
+
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="auth-logo">✓</div>
+        <div>
+          <h2 style="font-size: 1.35rem; line-height: 1.2;">TaskMaster <span style="color:var(--accent-primary);">Pro</span></h2>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Start Your Productive Journey</span>
+        </div>
+      </div>
+
+      <h1 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; text-align: center;">Create Account</h1>
+      <p style="font-size: 0.88rem; text-align: center; margin-bottom: 24px;">Sign up free with instant database isolation.</p>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <label class="form-label" for="regName">Full Name</label>
+          <input 
+            type="text" 
+            id="regName" 
+            class="form-control" 
+            placeholder="John Doe" 
+            required 
+            minlength="2"
+            autocomplete="name"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regEmail">Email Address</label>
+          <input 
+            type="email" 
+            id="regEmail" 
+            class="form-control" 
+            placeholder="name@example.com" 
+            required 
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regPassword">Password</label>
+          <input 
+            type="password" 
+            id="regPassword" 
+            class="form-control" 
+            placeholder="Minimum 6 characters" 
+            required 
+            minlength="6"
+            autocomplete="new-password"
+          >
+        </div>
+
+        <button type="submit" id="registerSubmitBtn" class="btn btn-primary" style="width: 100%; margin-top: 10px; padding: 12px;">
+          Create Account
+        </button>
+      </form>
+
+      <div style="margin-top: 24px; text-align: center; font-size: 0.85rem; color: var(--text-secondary);">
+        Already have an account? 
+        <a href="/login.html" style="font-weight: 600;">Sign in instead</a>
+      </div>
+
+      <div style="margin-top: 16px; text-align: center;">
+        <a href="/" style="font-size: 0.8rem; color: var(--text-muted);">← Back to Home</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="toast-container"></div>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/notifications.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>
