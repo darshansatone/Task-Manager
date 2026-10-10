@@ -33,16 +33,18 @@ const Auth = (() => {
 
   // Route guarding
   function enforceRouteGuard() {
-    const path = window.location.pathname;
+    const currentPath = window.location.pathname;
     const isAuth = isAuthenticated();
 
-    if (path.includes('dashboard') && !isAuth) {
-      window.location.href = '/login.html';
+    // Protect dashboard — redirect to login if not authenticated
+    if (currentPath.includes('dashboard') && !isAuth) {
+      window.location.replace('/login.html');
       return;
     }
 
-    if ((path.includes('login') || path.includes('register')) && isAuth) {
-      window.location.href = '/dashboard.html';
+    // Redirect away from login/register if already authenticated
+    if ((currentPath.includes('login') || currentPath.includes('register')) && isAuth) {
+      window.location.replace('/dashboard.html');
       return;
     }
   }
@@ -72,10 +74,15 @@ const Auth = (() => {
       }
 
       const res = await window.api.post('/api/auth/register', { name, email, password });
+
+      if (!res.token) {
+        throw new Error('Registration succeeded but no token received. Please try logging in.');
+      }
+
       setSession(res.token, res.user);
       window.showToast('Account created successfully! Redirecting...', 'success');
       setTimeout(() => {
-        window.location.href = '/dashboard.html';
+        window.location.replace('/dashboard.html');
       }, 800);
     } catch (err) {
       window.showToast(err.message || 'Registration failed.', 'error');
@@ -106,11 +113,23 @@ const Auth = (() => {
       }
 
       const res = await window.api.post('/api/auth/login', { email, password });
+
+      if (!res.token) {
+        throw new Error('Login succeeded but no token received. Please try again.');
+      }
+
       setSession(res.token, res.user);
+
+      // Confirm token is actually saved before redirecting
+      const saved = localStorage.getItem('taskmaster_token');
+      if (!saved) {
+        throw new Error('Could not save session. Please allow localStorage in your browser.');
+      }
+
       window.showToast('Login successful! Redirecting...', 'success');
       setTimeout(() => {
-        window.location.href = '/dashboard.html';
-      }, 700);
+        window.location.replace('/dashboard.html');
+      }, 800);
     } catch (err) {
       window.showToast(err.message || 'Invalid email or password.', 'error');
     } finally {
